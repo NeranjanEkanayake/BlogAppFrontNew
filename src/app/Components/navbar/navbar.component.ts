@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, Router, Event, NavigationStart } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +9,5 @@ import { RouterLink, Router, Event, NavigationStart } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  constructor(private router: Router) {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
-        console.log('Navigation to:', event.url);
-      }
-    });
-  }
+ 
 }

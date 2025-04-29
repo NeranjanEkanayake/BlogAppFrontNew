@@ -25,14 +25,14 @@ export class LoginComponent implements OnInit {
       password: this.form.value.password
     };
 
-    this.authService.login(credentials.username, credentials.password).subscribe({
-      next: response => {
+    this.authService.login(credentials.username, credentials.password).subscribe(
+      (response) => {
         this.authService.storeToken(response.token);
         this.router.navigate(['/']);
-      },
-      error: error => {
-        console.error('Login failed', error);
       }
-    });
+      // error: error => {
+      //   console.error('Login failed', error);
+      // }
+    );
   }
 }

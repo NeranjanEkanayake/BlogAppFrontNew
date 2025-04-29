@@ -1,5 +1,5 @@
-<div class="container justify-content-md-center p-3">
-    <div class="row justify-content-md-center">
+<div class="container p-3">
+    <div class="d-flex justify-content-md-center">
         <div class="col-md-4">
             <div class="card w-100 h-100">
                 <form action="" class="p-3">
@@ -11,10 +11,11 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea type="text" id="Description" class="form-control" formControlName="description"
-                            placeholder="Enter Description"></textarea>
+                            placeholder="Enter Description" rows="3"></textarea>
                     </div>
-                    <div class="button-container mt-3">
+                    <div class="d-flex justify-content-between mt-3">
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-outline-danger" type="submit" routerLink="/">Close</button>
                     </div>
                 </form>
             </div>

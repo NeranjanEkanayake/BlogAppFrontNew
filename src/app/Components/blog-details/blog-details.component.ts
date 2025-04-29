@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { BlogService } from '../../Services/blog.service';
 @Component({
   selector: 'app-blog-details',
   imports: [],

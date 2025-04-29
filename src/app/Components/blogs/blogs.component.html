@@ -1,12 +1,15 @@
 <div class="container justify-content-md-center p-3">
     <div class="row justify-content-md-center">
-        <div class="col-md-10">
+        @for (blog of blogs; track blog.blogId) {
+        <div class="col-md-10 p-3">
             <article>
-                <h4>Blog Title</h4>
-                <p>Blog description</p>
-                <button class="btn btn-primary" routerLink="/view-blog/:id">View</button>
+                <h4>{{blog.title}}</h4>
+                <p>{{blog.description}}</p>
+                <button class="btn btn-primary" (click)="onViewDetails(blog.blogId)">View</button>
             </article>
+
         </div>
         <hr />
+        }
     </div>
 </div>
