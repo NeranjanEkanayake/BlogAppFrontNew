@@ -3,13 +3,21 @@
 
         <div class="col-md-10 p-3">
             <article>
-                <!-- <h4>{{blog.title}}</h4>
-                <p>{{blog.description}}</p> -->
+                <h4>{{blogData?.title}}</h4>
+                <p>{{blogData?.description}}</p>
                 <button class="btn btn-primary" routerLink="/view-blog/:id">View</button>
             </article>
-
+            <hr />
+            <h5>Comments</h5>
+            <ul>
+                @for (comment of blogData?.comments; track comment.createdAt) {
+                <li>
+                    <p>{{ comment.content }}</p>
+                    <p>{{ comment.author.name }} - {{ comment.createdAt | date:'medium' }}</p>
+                </li>
+                }
+            </ul>
         </div>
         <hr />
-        
     </div>
 </div>

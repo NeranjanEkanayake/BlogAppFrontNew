@@ -16,6 +16,6 @@ export class BlogService {
   }
 
   getBlogById(id: number): Observable<Blog> {
-    return this.http.get<Blog>(`${this.apiUrl}/${id}`);
+    return this.http.get<Blog>(`${this.apiUrl}/blogwithComments/${id}`);
   }
 }

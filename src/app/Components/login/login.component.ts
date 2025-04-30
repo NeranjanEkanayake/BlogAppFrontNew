@@ -11,14 +11,25 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
+  userData: any;
+
   constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    this.userData = this.authService.getUserData();
+    if (this.userData) {
+      console.log('User data: ', this.userData);
+      return this.userData;
+    } else {
+      console.log('No data found');
+    }
+
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
+
   login() {
     const credentials = {
       username: this.form.value.username,

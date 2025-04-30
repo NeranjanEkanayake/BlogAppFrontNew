@@ -1,10 +1,11 @@
-<div class="container justify-content-md-center p-3">
-    <div class="row justify-content-md-center">
+<div class="container" style="height: 100vh;">
+    <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
         <div class="col-md-4">
             <div class="card w-100 h-100">
-
                 <form action="" [formGroup]="form" (ngSubmit)="login()" class="p-3">
-                    <div><h3>Login</h3></div>
+                    <div>
+                        <h3>Login</h3>
+                    </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" id="username" class="form-control" formControlName="username"

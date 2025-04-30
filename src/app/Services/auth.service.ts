@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Observable } from 'rxjs';
 
 export class AuthService {
   private apiAuthUrl = 'https://localhost:7064/api/auth';
+  private tokenKey = 'jwt_token';
 
   constructor(private http: HttpClient) { }
 
@@ -16,15 +18,35 @@ export class AuthService {
   }
 
   storeToken(token: string) {
-    localStorage.setItem('jwt_token', token);
-    console.log("Got the JWT: ",token);
+    localStorage.setItem(this.tokenKey, token);
+    console.log("Got the JWT: ", token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwt_token');
+    return localStorage.getItem(this.tokenKey);
   }
 
-  clearToken(){
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  decodeToken(): any | null {
+    const token = this.getToken();
+
+    if (!token) {
+      return null;
+    } else {
+      console.log("JWT decoded data: ", jwtDecode(token));
+      return jwtDecode(token);
+    }
+  }
+
+  getUserData(): any | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken : null;
+  }
+  
+  clearToken() {
     localStorage.removeItem('jwt_token');
   }
 }
