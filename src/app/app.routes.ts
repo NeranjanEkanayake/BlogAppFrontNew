@@ -3,7 +3,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { CreateBlogComponent } from './Components/create-blog/create-blog.component';
-import { ViewSingleBlogComponent } from './Components/view-single-blog/view-single-blog.component';
+import { BlogDetailsComponent } from './Components/blog-details/blog-details.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +24,6 @@ export const routes: Routes = [
     },
     {
         path: 'view-blog/:id',
-        component: ViewSingleBlogComponent
+        component: BlogDetailsComponent
     }
 ];

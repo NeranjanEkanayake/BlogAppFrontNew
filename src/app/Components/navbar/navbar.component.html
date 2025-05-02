@@ -10,9 +10,15 @@
                 <a class="nav-link" aria-current="page" routerLink="/">Home</a>
                 <a class="nav-link" routerLink="/create-blog">Create new</a>
             </div>
+            @if(isLoggedIn){
+            <div class="navbar-nav ms-auto">
+                <a class="btn btn-danger" (click)="logout()">Logout</a>
+            </div>
+            }@else {
             <div class="navbar-nav ms-auto">
                 <a class="btn btn-primary" routerLink="/login">Login</a>
             </div>
+            }
         </div>
     </div>
 </nav>

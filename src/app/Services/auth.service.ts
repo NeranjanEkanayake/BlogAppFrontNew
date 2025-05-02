@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class AuthService {
   private apiAuthUrl = 'https://localhost:7064/api/auth';
   private tokenKey = 'jwt_token';
 
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
@@ -19,6 +21,7 @@ export class AuthService {
 
   storeToken(token: string) {
     localStorage.setItem(this.tokenKey, token);
+    this.loggedIn.next(true);
     console.log("Got the JWT: ", token);
   }
 
@@ -27,9 +30,12 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return this.loggedIn.value;
   }
 
+  loginStatus(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
   decodeToken(): any | null {
     const token = this.getToken();
 
@@ -45,8 +51,13 @@ export class AuthService {
     const decodedToken = this.decodeToken();
     return decodedToken ? decodedToken : null;
   }
-  
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem(this.tokenKey);
+  }
+
   clearToken() {
     localStorage.removeItem('jwt_token');
+    this.loggedIn.next(false);
   }
 }
