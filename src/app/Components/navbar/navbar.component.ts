@@ -13,23 +13,25 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   private loginSubscription!: Subscription;
+  role: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginSubscription = this.authService.loginStatus().subscribe(status => { this.isLoggedIn = status; });
+    this.role = this.authService.getUserRole();
   }
 
   ngOnDestroy(): void {
     this.loginSubscription?.unsubscribe();
   }
 
-  checkIfLogin() {
-    this.isLoggedIn = this.authService.isLoggedIn()
-  }
-
   logout() {
     this.authService.clearToken();
     this.router.navigate(['/']);
+  }
+
+  isAdmin(): boolean {
+    return this.role === 'Admin';
   }
 }

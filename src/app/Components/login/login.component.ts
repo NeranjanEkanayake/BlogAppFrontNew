@@ -3,9 +3,19 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import {MatCardModule} from '@angular/material/card';
+import{MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

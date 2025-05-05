@@ -1,8 +1,8 @@
-<div class="container p-3">
-    <div class="d-flex justify-content-md-center">
+<div class="container">
+    <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
         <div class="col-md-4">
             <div class="card w-100 h-100">
-                <form action="" class="p-3">
+                <form action="" [formGroup]="form" (submit)="createBlog()" class="p-3">
                     <div class="mb-3">
                         <label for="title" class="form-label">Blog Title</label>
                         <input type="text" id="title" class="form-control" formControlName="title"

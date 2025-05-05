@@ -36,6 +36,7 @@ export class AuthService {
   loginStatus(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
+
   decodeToken(): any | null {
     const token = this.getToken();
 
@@ -45,6 +46,16 @@ export class AuthService {
       console.log("JWT decoded data: ", jwtDecode(token));
       return jwtDecode(token);
     }
+  }
+
+  getUserRole(): string | null {
+    const decodedToken = this.decodeToken();
+    if (decodedToken) {
+      const userRole = decodedToken ? decodedToken["userRole"] || null : null;
+      console.log("Decoded user Role: ", userRole);
+      return userRole || null;
+    }
+    return null;
   }
 
   getUserData(): any | null {

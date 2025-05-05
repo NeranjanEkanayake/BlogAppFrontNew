@@ -5,16 +5,18 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { CommentsComponent } from "../comments/comments.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-blog-details',
-  imports: [DatePipe,NavbarComponent],
+  imports: [DatePipe, NavbarComponent, CommentsComponent, RouterLink],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.css'
 })
 export class BlogDetailsComponent implements OnInit {
   blogData: Blog | null = null;
-  showButton: boolean = true;
+  isLoggedIn = false;
 
   constructor(private route: ActivatedRoute, private blogService: BlogService, private authService: AuthService) { }
 
@@ -25,11 +27,8 @@ export class BlogDetailsComponent implements OnInit {
       this.blogService.getBlogById(blogId).subscribe({
         next: (bData) => this.blogData = bData
       });
-      console.log(this.blogData);
     }
-  }
 
-  checkLoggedIn(): boolean {
-    return this.showButton = this.authService.isLoggedIn();
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 }

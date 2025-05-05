@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container justify-content-md-center p-3">
     <div class="row justify-content-md-center">
-
         <div class="col-md-10 p-3">
             <article>
                 <h4>{{blogData?.title}}</h4>
@@ -18,9 +17,12 @@
                 }
             </ul>
             <!-- Create a way to add comments only if the user is logged In -->
-
+            @if(isLoggedIn){
+            <app-comments></app-comments>
+            }@else {
+                <p>Sign in to add comments <a type="submit" id="registerLink" routerLink="/login">Login</a> </p>
+            }
             <!-- create the comment component and just use it here -->
-
         </div>
         <hr />
     </div>
