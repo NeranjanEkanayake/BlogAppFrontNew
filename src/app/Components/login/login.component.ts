@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import {MatCardModule} from '@angular/material/card';
-import{MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -22,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   userData: any;
+  loginFailed: boolean = false;
 
   constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) { }
 
@@ -46,14 +49,16 @@ export class LoginComponent implements OnInit {
       password: this.form.value.password
     };
 
-    this.authService.login(credentials.username, credentials.password).subscribe(
-      (response) => {
+    this.authService.login(credentials.username, credentials.password).subscribe({
+      next: (response) => {
         this.authService.storeToken(response.token);
         this.router.navigate(['/']);
+        this.loginFailed = false;
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+        this.loginFailed = true;
       }
-      // error: error => {
-      //   console.error('Login failed', error);
-      // }
-    );
+    });
   }
 }

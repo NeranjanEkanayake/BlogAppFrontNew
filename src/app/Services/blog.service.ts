@@ -31,4 +31,9 @@ export class BlogService {
     console.log("Create blog data: ", blogData);
     return this.http.post(`${this.apiUrl}/createblog`, blogData);
   }
+
+  deleteBlog(blogId: number): Observable<any> {
+    console.log("Delete BlogId: ", blogId);
+    return this.http.delete(`${this.apiUrl}/delete/${blogId}`);
+  }
 }

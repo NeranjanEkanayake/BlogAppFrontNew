@@ -4,15 +4,20 @@
             <h3 mat-card-title>Login</h3>
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Username</mat-label>
-                <input matInput placeholder="Enter Username" formControlName="username"/>
+                <input matInput placeholder="Enter Username" formControlName="username" />
             </mat-form-field>
-           
+
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Password</mat-label>
                 <input matInput type="password" placeholder="Enter Password" formControlName="password" />
-              </mat-form-field>
-            
-            
+            </mat-form-field>
+
+            @if (loginFailed) {
+            <mat-card color="warn" style="background-color: rgb(251, 90, 90); padding: 10px; margin-bottom: 10px;">
+                <mat-icon color="warn">error</mat-icon>
+                Invalid username or password
+            </mat-card>
+            }
             <div class="button-container mt-3">
                 <button type="submit" mat-raised-button color="primary">Submit</button>
             </div>

@@ -6,23 +6,26 @@
                 <h4>{{blogData?.title}}</h4>
                 <p>{{blogData?.description}}</p>
             </article>
+            @if (isAdmin() && isLoggedIn) {
+            <button type="submit" class="btn btn-danger" (click)="deleteBlog()">Delete Blog</button>
+            }
             <hr />
             <h5>Comments</h5>
-            <ul>
+            <ul style="list-style: none; padding-left: 0;">
                 @for (comment of blogData?.comments; track comment.createdAt) {
                 <li>
                     <p>{{ comment.content }}</p>
-                    <p>{{ comment.author.name }} - {{ comment.createdAt | date:'medium' }}</p>
+                    <p><small><strong><small></small><em>{{ comment.author.name }}</em></strong> - <em>{{
+                                comment.createdAt | date:'medium' }}</em></small></p>
                 </li>
                 }
             </ul>
-            <!-- Create a way to add comments only if the user is logged In -->
+
             @if(isLoggedIn){
             <app-comments></app-comments>
             }@else {
-                <p>Sign in to add comments <a type="submit" id="registerLink" routerLink="/login">Login</a> </p>
+            <p>Sign in to add comments <a type="submit" id="registerLink" routerLink="/login">Login</a> </p>
             }
-            <!-- create the comment component and just use it here -->
         </div>
         <hr />
     </div>
